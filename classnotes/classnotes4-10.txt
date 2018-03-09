@@ -1,0 +1,133 @@
+- Do not commit the binaries, the source code will yield the same values anyway, also we can very easily use make to get the same result so no real call for this call (unless we need reproducibility that is lost in removing the binaries -- like a time signature or something of the sort).
+
+- Dependencies are only what are necessary to build our programs (files and headers). These are compile time dependencies, not runtime dependencies, as are the files we are actually reading, we only need them in the runtime.
+
+- Cannot really compare against "TRUE", this is because "TRUE" will only be compared to get a positive result against "1", while comparing against "FALSE" will work very well, as any nonzero number will compare to be not "FALSE" -- this is for integers.
+
+- "if" statements essentially compare our parentheticals to 0 implicitly, so as long as our statement is not equal to 0 we will be set.
+
+- We have no real reason to check if "fclose" fails, this is because we cannot really change the outcome here, if the file will unable to close we have no real solution, thus we can just leave it here unchecked with no issues.
+
+- There are certain situations when our postfix operator actually takes longer than our prefix operator, as the values "i" in "i++" has to first to be coppied and then incremented once mutated, in this is more of an issue in C++ where we have larger complex objects which we need not worry about in C.
+
+- Using make, the symbol "$@" will always refer to the target, while the ">" symbol refers to the first dependency of the target -- we can use these to make our Makefiles a little more generic and direct. Also we can define variables that we might use more than once. Without being called with a target the Makefile will create the very first target, it is good practice to make this file an "all" file that complies all of the targets with all of the dependencies -- or it could create the output file.
+
+- C -- static typed language, we know the type of each value at compile time. We can find the scope, lifetime and storage of a variable because of this, but what we are not sure is what the value of this variable will be, as well as the location of this variable, which could point to anything in storage.
+
+- We can make a generalized Makefile using the "%" symbols, this allows us to generalize what the input will be, if we cannot match the target to any other value, it will match the pattern rule corresponding to "%".
+
+- Rules about the size of types of variables follow rules very losely, this changes as we travel from compiler to compiler, but the difference here is mostly irrelevent because from the programmers perspective it makes no real difference.
+
+- "const" variables cannot be changed in value, once intialized the value cannot be changed, this is an issue when we initialize values without assigning value, becuase it is assigned a random value of whatever space is open in memory at that point in time.
+
+- Using the preprocessor for the most part can become an issue because the complier will not know what the alue is, adn therefore it cannot check for errors to refer back to you and as a result can easily skew.
+
+- "typedef int myint", now the datatype "myint" will refer back to the datatype of the value on the left -- this is normally called an allias. We cannot think of typedef as creating a new type, it just refers back to our earlier value, this is not at all in any way of the form object programming.
+
+- When there was more barrier for entry in computer science, for the most part ddevelopers knew what they were doing, so they really did not need that many errors, yet now we cannot go back and make rules stricter, because we would ruin these initial programs.
+
+- In C, structures or "structs" are the accumulation of a couple of different variables grouped. This means that in memory these values in a given structure will be played out in line in data storage. We should keep members that are acessed together should be stored next to one another, as they will both be touched at relatively the same times.
+
+- Certain values in structures must be aligned at specific points in memory, addressed at multiples of 4 or something of the sort, thus these structures can have whitespace or unused storage depending on the complier, so we cannot assume the size of the structure.
+
+- Type of variable is "struct coordinate" not just "coorindinate", it is not a object, it is a structure and needs to be created as such. We can use shorthand to create a instance of our struct if we would like by throwing a variable in at the end of the definition -- this creates a variable of the type.
+
+- We can create anonomous struct, the only way we would be able to use this struct is by ultilizing the shorthand above.
+
+- A "union" is very similar to a "struct" -- unions and structs cannot have the same names, the tag is shared between the two different memory allocation spaces -- yet a union places all of its consituants starting at the same location in memory (it will always at least be as long as its largest value, while a struct will always at least be the value of the sum of all its values). For the most part we really stay away from unions, it is really just a work around for the strongly typed language requirements, so we can have a space in memory that could be occupied by one of many different datatypes.
+
+- We can also have anonomous unions.
+
+- We can really use the typedef here so that we do not have to continue rewriting "struct someStruct" -- also worth noting that in C++ we do not write "struct", instead we just write "someStruct", this is due to the object orientation of C++.
+
+- If we write "typedef struct tag1 tag1" there is syntatically nothing wrong with this statement, this about it, the variable name struct tag1 and tag1 are two totally different datatypes.
+
+- "sizeof()" is not a function, actually it is an operator, we pass it datatypes and variables alike (functions will not take datatypes).
+
+- "offsetof()" is also an operator, it will give us the value that represents how far off a value will be placed off from the start of the struct or union -- or whatever datatype.
+
+- We can assume that any memory address will hold only one byte of information.
+
+- When a function sees a values like "x.i" referencing a struct, it will relay back to the datatype defined in the struct/union -- this pretty much speaks for itself.
+
+- Size of an array is also not dynamic, we cannot change this value during compile time, we need to have an array with a set length -- although we can give an array a variable length array, but for the most part we stay away from this because it can throw some issues, it is not until runtime that we know the length of this array, but remember it still cannot change in size once initialized.
+y
+- If our string length is longer than our character array, there is no end value `\0\ at the end of the array, every single value is used.
+
+- We can say something along the sort of "typedef int x[10];", because we must remember that the brackets are really just part of the datatype declaration.
+
+- Arrays will decay into pointers, so remember that arrays are second class citizens in C.
+
+- We can almost always assume that arrays will have no whitespace between the different values, thus they are unqiue in this way.
+
+- "strings" really just do not exist in C, instead we have arrays of characters -- there is not datatype for strings in C.
+
+- This arrays of characters do not represent the size of the strings, the size of a string is the size of the array that the string occupies.
+
+- In C, the convention is to end the string with the \0 character, other languages have other conventions, such as Pascal which provides the length of the string as the first value -- this seems like a good convention for naming, but it makes no real different on the structural memory side.
+
+- Every variable has a scope and a lifetime -- you already know what scope is -- a lifetime represents how long the memory will be reserved for the variable before it can be rewritten and the memory reopened for other uses. We can pretty easily logic through how long a variable will be able to hold its value, and thus how long its lifetime will be, in C the lifetime of the variable is exclusive to the scope, unless we are creating a static variable.
+
+- When a variable is in more exclusive scope than another value, this more specific value is said to "shadow" the one that is further in scope. Remember that the variable that is more distant in scope still exists.
+
+- An expression will have a value and a type at compile time, while statements will not -- for the most part we will deal with expressions in C, even evalutations are expressions, calling functions as well -- expressions can be evaluated, this is most central.
+
+- Take a look at the grammar of C, you will learn a little more about how to understand the compiler and how it understands our C files.
+
+- Pure expressions will have no side effects -- you could evaluate this value indefinitely and it will be given the same value over and over again. Inpure expressions will not make the same promise, they can have side effects where our values are incremented or mutated during our expression (++c will have a side effect, as the value of C cannot be determined).
+
+- Any C file will have a body that constitutes statements and declarations.
+
+- Sometimes we could rather not have a if statement actually have a body, thus we can just have the statement followed by a semicolon.
+
+- Statements can be an "expression;" or "{statement}" -- thus we can have "statement: {{{x;}}}" anywhere we are allowed to have a statement, we can have this value. This grammar, in essence allows us to generlize the rules of any C program.
+
+- A similar rule follows for expressions in that "expression" will be equal to "(expression)", so we can have "{{{(x;)}}}" and still have this statement be evaluated.
+
+- We only need a ";" following an "if" statement because we need to have a statement following an if statement -- the grammar defines how we type.
+
+- Swtich statements reqiure that our expressions in our cases be constant, such taht we can compute them at compile time. Switch will jump to a value that it meets and then continue unless it hits a break -- really we are implementing "goto", so this is why it acts in a strange way. still technically swtich-case statements will run faster than a string of if statements, yet the important aspect here is that it is very easy to read.
+
+- Our statements need to be integers (I'm pretty sure) -- remember to break -- do not repeat case statements.
+
+- While loops will not end with a semicolon, this is because it ends with a statement, yet our "do-while" statements end with an expression and thus will require that we add a semicolon at the end of the loop.
+
+- For loops will have three expressions seperated by semicolons -- yet in C11 or newer we can have our first statement as a declaration (which is not a real expression -- "what is the type and value of int x = 5" -- there is none).
+
+- Because the for loop really only asks for thre expressions, we can really place any expression in there, actually anything that has a type and value will compile, it need not have any logic. We can also mutate any of the variables we use in our expressions within the loop.
+
+- Multiline comments will not nest, so it is useful to use single line comments when writing our actual documentation as opposed to commenting out actual code.
+
+- "assert" is a preprocessor macro, not a function of the compiler, to turn off assertions we can #define NDEBUG in the file, thus we can just define this and leave the assertions in so that we have excess documentation for whoever else uses our code -- we lose no effeciency.
+
+- "static_assert()" is an actual compiler function, if our paremeter is false it will throw an error, we should use these whenever possible, when not possible try to use the preprocessor -- be wary of side effects here.
+
+- There is a "exit()" C program that allows us to exit "main()" with an error.
+
+- There is no rule that our "#include" has to be at the top of the file, it is just where we put these files for the most part.
+
+- Use functions over macros whenever possible -- they will be run by the actual compiler and not just treated as text values -- almost like string manipulation.
+
+- When we write a function declaration but no definition, we do such so that the C file knows what the function being dealt with will take and return -- even if this function exist in another file.
+
+- Valgrind will run our compiled program slowly, but it will check each of the calls we make -- for example it will not let us read from data locations that we have not yet read.
+
+- Because Valgrind runs after compile time, it has no real understanding of what our program has written, but it understands explicitly what is being run becuase certain values or types will behave in certain ways. Staticly typed languages give us a leg up in that compile time is faster because all of our data is defined before compiliation, but it means that our binary files created from the staticly typed languages will not parellel our original files nearly as well as a dynamically typed binary file would paralell a dynamically typed source file.
+
+- Any segmentation fault is really just an opprotunity for someone else to exploit the programms you have written.
+
+- "Everyone programming in C++ is using this Valgrind debugging program".
+
+- Stay away from memory address 0, your OS owns that space, it really likes keeping to itself.
+
+- If we compile with our additional information "-g" the Valgrind program will be able to exactly see where the error in our programming arises -- this makes our binary file slightly larger, but it really is worth having the additional information from Valgrind.
+
+- When using Valgrind always look at our first error first, as our later erros is most likely the result of the earlier errors in our programs -- really just always use this program to help find errors.
+
+- Valgrind has some issues that are supressed because they are so common and not detremential that it is not worth causing noise about, also they are normally brought about by files that are implemented, not native to the programmer who is running Valgrind alongside their code.
+
+- GDB is a debugger as well -- same issues as Valgrind has from running off of the binaries -- "reading symbols" lets us know that it has the additional information we include with "-g".
+
+- GDB allows us to go line by line and examine information in our program inline, almost like a Java breakpoints -- it will slow down the program, but it will not throw errors in the same way that Valgrind will for us (GDB does actually allow us to add breakpoints as well).
+
+- GDB is really not quite an IDE, but does a great job as well -- try these two programs if we run into issues while we are programming, they are not exclusive to C, but we will absolutely be using them and they are definitively worthwhile.

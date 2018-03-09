@@ -1,0 +1,121 @@
+- AVL trees will be the same across pretty much every language -- not really unique to C programming.
+
+- A min-heap will have nodes that are smaller than their children, whereas a max-heap works in the opposite direciton. Additionally it will be a complete binary tree, thus we can know where the newest value is going to be added (lowest column, leftmost node index).
+
+- The way you construct a binary search tree will determine the shape of the tree -- essentially we will have a linked list, which means the complexity increaes to O(n) in worst case, which is more common and will be out of your control in a binary search tree.
+
+- A binary search tree is unqiue to a set of data -- because of this we can sort a set of data and then sequence in a certain way to get a balanced tree (take the median term).
+
+- A binary search tree can have an unexpected definiceny -- which is significantly more dangerous.
+
+- An AVL tree is really just an improved binry search tree (just as a red and black tree).
+
+- Whenever we create or add to an AVL tree, it will insert as a binary tree would, but a self-balencing tree would then correct those discrepencies when the new values are added.
+
+- Every AVL tree is a binary search tree, but the converse is not necessarily true.
+
+- A set of elements can still be represented by a varity of AVL trees, but we can be certain that all of those AVL trees will meet certain restrictions that allow us to self-balance the tree.
+
+- An AVL tree has a local and recursive propety of the height of any subtree having a difference of at most 1 -- this property is local to each node and is determined recursively.
+
+- The location of the elements on the left or right side of the tree makes no real difference -- the key here is that the height of an AVL tree will be set, and thus we know that the search will be at most log(n), because the height will be log2(n) where n is the under of datapoints in the set (think, each tree contains twice as many elements as the prior, thus log2(n) entirely makes sense).
+
+- When we rotate and AVL tree, what we really do is swap the locations (in C its just moving around pointers) and if we draw diagrams we can see where we need to move the trees in order to create a tree that is balanced.
+
+- Remember that changing pointers is in constant time, so when we make these changes to the tree we are working in constant time and we will be working at a rate faster than possible with a binary search tree -- in the example Dries gives we're actually only swapping two pointers as well which is not issue at all.
+
+- We need to know when we are finding these patterns in the binary search tree, otherwise we have to search through the tree and that takes possilly O(n) time and the whole purpose of the AVL tree is to avoid this issue.
+
+- When we are recursing back up the tree after inserting a new element and assuring that we find no discrepencies in the table -- all values outside the realm of what we are inseting will be fine, and our swap operations will leave them be, so we have no real worries about messing with data outside of what we are recursing.
+
+- This is called the "balance factor" it tells us the difference in the branches of the two subtrees.
+
+- Problems will balance factor can spur from entirely differentsides of the tree -- think of the problem of balance factor for the root, thus as we recurse up the tree we may have more than one swap to undergo.
+
+- When we are working with AVL problems we can think of taking a random element -- where would it go? We also know the range of values that it will be between.
+
+- Really what our rotations do is remove one unit of depth on the left and add one to the right or the opposite -- when a problem arises in the root we need to do this multiple times over (remember that we will often have to make swaps compounding on one another).
+
+- The same rotations occur for an AVL tree when we are removing items -- it is entirely the same logic, we just find the information another way around.
+
+- We do not need to actually save the height of the trees that we are saving with AVL -- all we need is the balance factor (which will increase when an element is added on the left and decrease when an element is added on the right, depending on how we determine the value of the balance factor -- here it is left height - right height).
+
+- Remember that seraching is entirely dependent on the datastructure -- this is why searching a hash table is faster.
+
+- Worst case scenario for any search will always be O(n) unless you have some strange dataset -- for the most part we can assume that the worst case for a search is looking for the value by comparing with every single value in the dataset.
+
+- Binary search is the really just looking through an array that represents what would be a perfectly balanced binary search tree (remember we always look at the median first) -- althoguh this is not necessary the median as there are some datasets that have an uneven number of values.
+
+- To get some information when we are not allowed to see output we can purposely fail the program to better understand where we are in the functinoal processing.
+
+- Compilers will give us line numbers before a file was preprocessored -- this is why we cannot run a compliation error during runtime -- we would have needed to solve these issues beforehand.
+
+- People will almost always ask about sorting at a job interview. No matter what your background is you should know this information.
+
+- Sorting just puts data in order -- the order depends on your comparison function, this the order is not actually significant, just the fact that the information is somehow ordered.
+
+- All we know about the elments is how to compare them -- even a set of data that is already sorted we must search through at least once.
+
+- During a comparison sort (where we are comparing terms) the best case scenario will be nlog(n) for the most part -- the extra 'n' coefficent here arises from looking through the information a final time.
+
+- A "linear" sort will give us some information about the data that allows us to avoid comparing the values -- here the complexity in best case will be O(n), we can actually do it in linear time operations, but we have to run through the entire list so it will end in O(n) or worse.
+
+- For certain sorting algorithms the preexisting order of information beforehand will make a difference, but for otheres there is no difference in performance based on the sorting algorithim.
+
+- Why would we ever use insertion sort? It has an n^2 complexity which is horrendous -- but remember that if a dataset is already sorted insertion sort will run O(n) so we can use this to fix a dataset that just has a single value that has ben skewed, whereas in some other algorithims for sorting, one skewed value will result in the worst possible case for complexity.
+
+- Insertion sort works really well for linked lists -- remember that there is no gaurentee in insertion sort that we have random access, so it will work well with linked lists where there is no random access.
+
+- C compiles really quickly because it works on such a basic level, especially with optimization -- think about how much more work a Java compiler will work.
+
+- An unstable sorting algorithim will not gaurentee that values that have identical comparisons will be in the same order after the sort (think about pointers to data, we need to know which value will come first). A stable sorting algorithim will maintain the order of the valuesin the dataset -- it will insert them in subsequent spaces, but it will maintain the order.
+
+- QuickSort is like the workhorse of sorting algorithims, it has a strong average case and it is independent of the dataset beforehand.
+
+- QuickSort can run stable if we take extra care when we are programming the functionality.
+
+- If QuickSort will find the correct paritions, the hope is that it will divide (in-place) the set into two equal groups on every recursive step -- thus we will have log2(n) levels and as a result the algorithim will run in log(n) -- this is why picking the correct parition is so important.
+
+- When we pick a partition we will get to a point that is essentially running an insertion sort (if the partition is always first or last). It runs an implementation independent of how insertion sort will run, yet it is still equally as inefficent.
+
+- The parition is what moves the values around, thus having a stable paritioning algorithim will allow us to also have a stable QuickSort algorithim.
+
+- We could like to parition from the median, but we cannot use the median because we need to run through the data to find the median, and thus the complexity would be multiplicitively increased by 'n' giving us n^2log(n), which we do not want as our complexity.
+
+- There is a difference between the median and the middle value -- think about it, the median will parition into two different sets of even values, where as the middle element coudl be anything at all.
+
+- When we take three values and use the mean of their values as a piviot, we will entirely rule out the possibility of including the highest and lowest values as our pivot, thus we have ensured that our complexity will be less than n^2.
+
+- We can ensure that our values we all be distinct by selecting a random number from a range that is one smaller and then skiping and wrapping around the value we are trying to avoid.
+
+- QuickSort is so sensitive that it will totally ignore information given -- it will actually run the same regardless of how sorted the data is sorted before the sort begins.
+
+- MergeSort is out of place, this is why we will sometimes avoid it, but a good example is Google, which uses MergeSort nearly religiously.
+
+- MergeSort will not pick a parition, so we have no reason to worry about any unpredictability.
+
+- When we merge two seperate sets we can just use two pointers to the first values in each set and then continue to increment the pointer -- remember this will be an issue for stable vs. unstable sorting.
+
+- You can think of the process tree for a MergeSort as being twice the length of spliting the original set into the individual lone sets, so we can easily think of the complexity of the MergeSort as being 2log(n) -- twice the height of spliting the set into individual items.
+
+- MergeSort has no real contention with datasets that are not part of one file -- it has to parse out the values anyway. Also it runs linearly, so a disc which will have information contiguously will run very will with MergeSort.
+
+- Also MergeSort does not necessarily require log(n) extra space, it could use significantly less if we configure the MergeSort to run in a specific fashion where we split up the values step by step and continue using the same set of information that we have allocated out.
+
+- The complexity of counting sort will be O(n + k), where n is the number of values sorted and k is the largest value in the dataset -- the k arises in the complexity as we must allocate memory of size k (this is where we will save the values that we will be incremementing).
+
+- Where is k is small in relation to n, counting sort will run well, yet when k is much larger than n, then we will have a rediculous runtime as well as an outrageous memeory requirement to meet. Thus we should be using counting sort in an important niche area -- this is something you will likely be asked.
+
+- As we are copying the data over into the array that is our final we will decrement the values we are pulling over until our "bucket" value is decremented to 0 -- yet this only works in paper, remember we want to write stable sorting algorithims.
+
+- If we run through an array backwards, we will find that our counting algorithim will perseve the continuity of the values, this makes sense when we really think about what is happening. It stacks up the values and then the one on top if added first and as a result the values are swtiched, but if we run backwards the data order is perseved (really it is all perpsective though, in essence we are just abusing the program).
+
+- The step when we locate which values in the array actually used and then copy that information into our array that saves the indexes we increment once and decrement once when we get the values back -- this is called the fold.
+
+- At some point, because counting sort will run in a linear complexity with a large y-intercept, but at some point it will perform better than n*log(n), thus this is another example of when Google will use massive amounts of space to more efficently sort massive groups of data.
+
+- Radix sort is navigating the issue of allocating a massive amount of data to save an array of values leading up to k by looking at each digit individually, thus we can be sure that k will only be 9 in highest case.
+
+- In theory Radix sort has a worse complexity than counting sort, we are also ensuring that we will have a samll k value, thus we can be positive that Radix will actually run more quickly.
+
+- Because the complexity of Radix sort is O(pn + pk) = O(p(o +k)) we have really not changed anything about the overall complexity -- thus we can be sure that we are not losing any complexity.

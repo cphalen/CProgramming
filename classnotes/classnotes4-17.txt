@@ -1,0 +1,145 @@
+- C and C++ do not have garbage collection, so we have to use certain get around strategies because we simply do not have dynamic memory allocation in that fashion (but with pointers we get the real work around).
+
+- People fear pointers for no good reason for the most part (let them be simple).
+
+- Pointers are no different from any other variable type -- the compiler will treat them the exact same way, just think in this way.
+
+- Really we can just think about variable types as a way to declare the size of a variable -- for example characters are really just numbers.
+
+- The maximum value of a pointer is almost always based off of the platform (we vary between 32 and 64 bits), but really we just care that the pointer ranges from 0 to some larger number (this is the memory address).
+
+- "*" means that this is a pointer to something. When we declare a pointer and gie it a memory address, there is no check that this is a valid memory address, we can give the pointer any address.
+
+- The "&" operator returns the  memory address of a variable. Do not forget that pointers also have locations in memory -- we can have pointers that point to other pointers.
+
+- A pointer is just a type of integer variable, it just so happens that this integer also represents a location in dataspace.
+
+- When you put the "*" operator before a pointer you will dereference the pointer and thus be able to treat the pointer as if it were the actual variable at that memory address.
+
+- "*" is the multiplication operator when it is binary, but the unary operator instead is the deferencing operator.
+
+- Size of a variable is never dependent on what is holds, this is becuase we are using a statically typed language.
+
+- If we have a pointer to an integer, which is then dereferenced, we now essentially have an integer -- this is why we really have to be careful here declaring addresses.
+
+- All adresses are the same size -- just like integers, all pointers will be of the same length. Pointers are not really a variable type, they are more of a family, as we can have pointers to different variable types which are then different variable types entirely.
+
+- There is no real "typeof()" function in C, it is not nearly that simple, but we can still do some introspection as we examine the different variable types.
+
+- We almost never make up our own memory addresses, we pracitically always use the referencing operators.
+
+- We can also create pointers to other pointers -- this is something we have seen before, but gets slightly confusing.
+
+- The address of a variable is the first byte that consitutues the variable.
+
+- With pointers we can essentially change value without ever actually referencing them by name.
+
+- Think of a pointer as pointer to something, we can call it "T", it makes no difference to us, we just know that the "*" values will cancel out again and again. We can continue to compound and create pointers to pointers upon pointers to a final primative datatype eventually.
+
+- Pointers will let us kind of write illegal programs, in that pointers kind of keep data addresses open -- there is no check that the address a pointer contains is of the specified type or actually even existent, we need to ensure that we are referencing data that does actually exist at the point of dereference time.
+
+- The issue with rewriting pointers after the data has been deleted from that memory adress is that some other data could be saved in that new location. When we read and write we need to ensure that our location is what we want it to be -- the compiler will not be able to tell us otherwise, as memory address allocation is runtime dependent.
+
+- We should really always be checking out order of precedence when we are programming in C -- also remember that we can create pointers to structures and unions as well.
+
+- "->" means "deferencing the first variable and selecting the section variable as a member" which could also be written as (*s).s2 == s->s2.
+
+- We should set our pointers that we are no longer going to use to be NULL so that we can put away the pointers that we are no longer going to use -- this is why no compiler will ever use the data address 0 -- this is our solution to "dangeling pointers".
+
+- Pointers can point to nothing, while references are supposed to always refer to a vaild memory address -- although this is not always the case. Pointers can really point to whatever you would like, often times we will set a pointer to NULL.
+
+- The referance operator has a type as well -- for example &a where a is an interger will be a pointer to an integer, just as the pointer which will most likely inherient its memory address.
+
+- We will often times have a pointer to a pointer, or even a pointer to a pointer to a pointer, which is three levels.
+
+- All pointers are the same size, no matter how large the data that they are saving is, the only importantence here is the location, and all addresses will be of the same length.
+
+- We can do addition and subtraction with pointers and it is very easy and entirely too common to misuse this arithmatic which can throw some very dangerous errors -- remember ther e is always a danger when we are playing with memory.
+
+- Adding an integer to a pointer will increase the size of the integer by interger*n where n is the size in data of the type being referenced. These same precedents keep for the shorthand (a++, a--, --a, ++a).
+
+- We can also subtract two pointers, these pointers will be of the same type, the difference between them will give us the distance between two different addresses in memory in terms of the data type -- this makes sense for the most part (we care about what T is, the base multiple will be that size of T).
+
+- We cannot add pointers, which actually makes sense because the sum of two pointers would really have no meaning when we really think about what any usage there we could have.
+
+- A "void *" means that there is no real type to the pointer value that we have -- we are breaking symmetry here and we really do play dangerous games here when we write in C.
+
+- We cannot dereference a void pointer, because when we do we have no real idea how long this pointer will be, so we cannot dereference the pointer to void and the value returned will just be void.
+
+- We can dereference a pointer to void, this is because we know what the length of a pointer will be -- just think of pointer to void as T, it will work logically.
+
+- Void pointers in this sense are no better than integers -- they just hold a value which has no special operators, like "*" -- yet still these void pointers are really heavily used.
+
+- Void * are what we create when we do not know what the type of a dataslot will be in runtime, this is our C equivilent of Java's dynamics.
+
+- With void pointers we need to caste -- this is why we can get into a dangerous situation here. We will overrule the type system here and instead tell the compiler to listen to our decision for what datatype this value will occupy.
+
+- Using a void pointer it essentially comes back onto us to tell the compiler once again what the type of the pointer is once again.
+
+- When we set a void pointer to the value of a pointer to an actual value type -- this understandably throws no errors as we are losing data but not assuming anything about the data we are changing, yet when we set a pointer to a type to be equal to a pointer to void we will have no erros, we need to be very careful here. Void pointers are overriden the type system, so we always need to be on the lookout.
+
+- Arrays do not exist in C in the way that other types in C -- arrays will decay into a pointer to its first element.
+
+- Arrays will always decay, except for in a few certain circumstances. Is we say &array, the type of the pointer will hold true, we have no idea what it would even decay to when we use it in that way. When we pass an array to size() it will not decay, this is because sizeof() is an operator not a function, the same holds here for the alignof() operator. Finally arrays will not decay when we define a char[] using string literal, this is because we need the value and the assignment to be of the same value, this makes sense when you consider how the staticly typed language should work -- unless the declaration type is char *, if that is the case the string literal will decay as well.
+
+- Now in every other case this array will decay into a pointer, in actually every single other usage of an array outside of these few exceptions -- pointer to the first value of the array.
+
+- Every case in the use of an arrary is indepedent -- it does not decay once, it will decay or not on every single use, the importance in how the value reference in data is utilized -- the array itself does not change, only the usage or evaluation.
+
+- An array of strings very commonly results in a pointer to a pointer of char, this is because a string itself is also an array.
+
+- We can index pointers as well, which seems kind of strange becasue we cannot have arrays of pointers, but we can have pointers to pointers -- this is because arrays will decay. We can go back and forth treating datasets as arrays or pointers, it is really difficult to explain but it is all kind of the same.
+
+- With a function pointer the only action we can take is to dereference them, so the dereferencing of the function is implicit -- we do not need the "*" dereferencing variable. This works the same way with the "&" referencing operation, the compiler sees this as implicit as well.
+
+- This is why we cannot add a value to a function pointer, becuase there is no real T value for a function -- we could set the function pointer to NULL though, this can be ver useful.
+
+- Think of quicksort -- which takes functions as parameters, which will compare two constant void pointers, this is important because it will make the quicksort program entirely dynamic and malleable.
+
+- Three steps to uncoding complex declarations -- 1) Find the idetifier 2) Go to the right -- unless we find parentheses 3) Go to the left.
+
+- Typedef works in this same way -- we do not necessarily need A space B for typedef, we can also put an advanced declaration call.
+
+- We should try and use typedef as opposed to using complex functin delcarations -- they are incredibly useful.
+
+- Function pointers could possibly be different in size than other data pointers -- but Dries was really just tyring to fuck with me I think.
+
+- All functions share the same namespace -- there is no scope here, we cannot name clash.
+
+- If two headers have the same marco this can become a big issue -- we try to have unqiue macro names so we can avoid this problem.
+
+- C exclusively passes by value -- there is no possibility for passing my referedence unless we use pointers, this is unfortunate but significantly better than what Java perfers.
+
+- "int f(int a)" for the compiler really just means "int f(int a = b)" we are copying the value not the reference -- this is only way that C works.
+
+- Java actually supports "pass-by-object-reference" which is an interesting enough way to work the function.
+
+- Technically, in C we can return more than one value, as we can just pass that value as a pointer and then augment the reference on the pointer.
+
+- We cannot use pointers to mutate the value of a constant variable, but we can just caste the pointer into an integer pointer and then mutate it in that way.
+
+- "static" allows us to remove functions from the global function namespace -- essentially it makes it specific to our one file, it is just another use of "static" to give it as a function declaration. Dries's example is "static int compare()", this is because compare could likely be diluted in the namespace.
+
+- We can use pointers as a return value that pointers to a local variable of a function -- careful here as a pointer will not extend the lifetime of this variable, so the issue here is that would easily get pointers which are referencing the wrong place in data again.
+
+- Dynamic memory allocation essentially gives us 15 bytes of memory and returns the value of the first byte as a void pointer -- the pointer must be of type void because what else could it possibly be? The language has no clue how you are going to use those 15 bytes.
+
+- Once you reserve memory -- you need ot ensure that you release the memory, there is no garbage collection in C. If you do not release the memory it will hold until the program comes to an end.
+
+- When we are using "malloc" we need to ensure that we dereference the sizeof() operator agrument, otherwise we will be saving enough data for the pointer not the type T.
+
+- "calloc" works the same way as "malloc" except it initializes all of the values that the pointers reference to "0".
+
+- "free(ptr)" will free up all of the information we have allocated, we do not need to tell how much data that we are freeing, the operating system will be able to discern this information for us.
+
+- Pass by value ends up being a good aspect to C functionality when we work our way into recursion.
+
+- One word of warning is that in recursion we will run out of space, even when we have a significant amount of memory remaining, this is why we stay away from recrusion past a depth of a couple hundred for the most part.
+
+- Valgrind ensures that you free up all of the memory you do not free - this is important because Dries really does not like having open memory leaks. Valgrind will show us this definitely lost data and it is important that we trace and free this dataspace we have allocated.
+
+- For Valgrind, "possibly lost" data is a pointer which it is not convinced the program uses, thus we should make sure that we do not have any left open pointers that have no been freed.
+
+- Do not forget that we can use "--show-reachable=yes" to help us debug with Valgrind, giving it extra information about the C code behind the binary.
+
+- You can explain why "gets()" is really a terrible function now -- this is because arrays decay into pointers, and pointers will not have a set length -- we can also get ourselves into trouble here as well. 

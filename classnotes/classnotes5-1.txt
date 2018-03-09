@@ -1,0 +1,153 @@
+- If you have a key function then all of your tests will fail, understand this during homework testing to ensure that we are looking for our errors in the correct places.
+
+- Predence helps the computer understand us when we are being ambiguous -- this happens a lot in langauge, more so than we realize. Remember that comuters do not have the same context that we have.
+
+- Parsers are what actually work through the abmiguity that we include in our program.
+
+- We have terinary operators as well as unary and binary (like the : ? operation).
+
+- We can create a parsetree which shows the exact order of the operations we are enacting -- you can think of a parstree as passing its results into the levels above. We use ambiguity so that we can avoid actually creating these parstrees and instead have the operators that we will write.
+
+- Operator precedence makes no difference in teh way of how a comptuer will understand the operations we write -- it will always understand the operations the same way, really it is just a question of what funciton we are trying to create.
+
+- Dries will always give us a table on the test -- you will not have to memorize the precedence.
+
+- We should always try to make our code explicit -- that was it makes no real problems as to whether or not we know the table, a year from now we will still understand the code that we wrote.
+
+- The parentheses are always implicit regardless of whether or not we actually add them -- we might as well add the parentheses as there is absolutely no performance cost (only a time cost).
+
+- The table tells us how the operations will commute when they have the same precedence level (left-to-right vs right-to-left). This is associativity, precedence is the the level of priority.
+
+- We could potentally right if(a, b) as it is an expression (the , is an operator). But be careful using this character. It returns the value and type of either the first and second -- but other than that it has very little use.
+
+- When operations are not adjacent they can have the same precedence without rivaling associativity -- think about it, this is just how we do mathematics.
+
+- The comma in an expression is not the same as commas elsewhere - they have totally different meanings, the symbol is not of the same meaning when referenced outside of an expression.
+
+- When we have really complicated operations we should just use parentheses for readability -- this is an important point.
+
+- If the ways to parse an operation are invaild, the parsetree will not even consider that interpretation -- the parsetree will decide between valid possibilities.
+
+- if(a || b) actually is the same result as if(a | b) this is become logically the same result will be run by the operation. This is not necessary true of && -- as or statements will never lose bits while and binary operations will lose those bits.
+
+- The compiler will create parsetree patterns for function declarations as well -- following similar rules. There is no ambiguity for the compiler once we have layed out that parsetree, it needs no parentheses.
+
+- Which order oeprations on the same level of a parsetree are carried out makes no real difference in the actual interpertation of the function. We have to understand that if we are arranging function calls it becomes really important which functions run first -- we need to see how the sequence of our program is layed out.
+
+- Operation precedence has absolutely nothing to do with evaluation order. The operation precedence and association allows us to create a parsetree -- the evaluation order allows us to run that parsetree. When functions have side effects, as functions will (in imperative programming languages), it becomes really important that we understand the evaluation order.
+
+- Evaluation order changes from C standard to C standard, but we are gaurenteed a few givens. First of all the reason that evaluation order will change is due to efficency maximumization. Second, consider how dangerous playing with evalution order is in languages that are non-sequential (in asnchronous programming).
+
+- Operations with side effects will be run however the compiler decides to excute, but it is determined that any operation with is a sequence point will complete its call and its side effects must have occured before the next sequence point is evaluated.
+
+- commas operations, logical-AND, logical-RD, conditional-expression, and function calls are the only sequence points. We ensure that these sequence points will run sequentially with their side effects already having occured.
+
+- Boolean logic operators will short-circuit if the first half of the evaluation is false. This is really importnat when the second half has a side effect, as this side effect will only occur when the first half of the evaluation is definitively false. Both the logical OR and the logical AND will short-circuit, really try not to rely on these implementations.
+
+- Careful with logical operations for this reason -- key point from Dries is "don't try to be too smart".
+
+- Recursion is any function that calls itself or has a possibility of calling itself (it can be conditional as well).
+
+- You could typically write something that is a for loop in recursive fashion -- in functional programming langauges this is actually runs behinds the scenes slightly.
+
+- In C there is a max limit on how large the stack can become -- meaning that we cannot recurse infinitely, there is a limit on how many recursive calls we can stack on top of one another.
+
+- In for loops we do not copy data across in the way that we do using recursion. When you think about recursion, becuase C is pass-by-value there is a max number of recursive calls. This stands unless we are using tail recurison (which is a common compiler optimization) where the recursive step is our final step, thus our values will not be saved as they are not important to keep alive as we will never use them again -- as the last statement in our function is the recursive step. We could use memory addresses to ensure that this tail recursion is actually occuring -- as it will continue to utilize the same memory.
+
+- The rules for compilation for the most part is that the compiler is allowed to do whatever it would like as long as we cannot tell that the compiler is actually doing so -- gcc is getting more and more efficent so the example is that it will tear apart benchmark functions becuase the gcc is too smart and can predict values.
+
+- Recursion can be indirect as well as direct (calling a function that calls the function we called originality).
+
+- A CPU remembers where it must return to by saving the memory address -- after returning from a function this is how we know where the function will return to (in Assembly we can image the functions as having actual space -- all statements become calls).
+
+- It is aboslutely worth remembering that the stack is just something that is a commonality accepted by a vast majority of compilers -- it is not essentially vital to any compilation.
+
+- Always look at your edge cases. Stay careful in recurison especially as infinite recursion where we are at a danger for breaking a program.
+
+- Something like the Fibbinocci sequence is an entirely different animal -- we cannot express this functionality wiht an iterative for loop nearly as easily. Also when we recurse with fib(f - 1) + fib(f - 2) we are actually recursing twice, which is entirely inefficent, especially as we cannot use tail recurison because we must hold onto the values for our addition.
+
+- Recursion is only really a good idea when we know our complexity class is linear or for sure less than linear -- in this case recursing is really no issue at all.
+
+- When we have a for loop there are no return addresses as in recurison, as a for loop does not have to save data for where it will return to, this is a simple reason for why for loops will on the most part run more quickly than recursion (although not necessary that much faster, and sometimes iteration will be unable to have the same effect).
+
+- We can see in compiler explorers how every line of code relates directly to an assembly function and see exactly what each function is carrying out.
+
+- gcc has different optimization levels -- if we run a program with "-o3" is will actually not even call functions if they have no side effect. In thought this actually makes perfect sense.
+
+- Even when functions have no return value -- they will still be compiled in case a call to that function exists outside of our single .c file, but if we declare this function static, then the maximum optimization of our .c file will actually write out the entire function if it has no side effect -- it knows that the function has no real use.
+
+- Modern compilers are really very smart -- be careful here and know the optimiziations that it is making. In Dries's example the recursive function is instead turned into a loop for the sake of efficency without him even knowing.
+
+- Unit testing can be really difficult in imperative programming, as all of our functions will likely have side effects, so we need our more key, important functionality to work in order to test the more complex functionality. We cannot test that complex functionality in isolation.
+
+- If a unit test fails, it is not necessarily gaurenteed that the aspect that the unit test is working with is what is actually working incorrectly (as it is hard to define tests in isolated).
+
+- cunit is what we use for unit testing in this test for the most part.
+
+- The more information we can give a unit testing framework -- the more information its errors messages will give back to you upon failure.
+
+- There ar helpful macros in unit testing as well -- so that we can easily add in more information to our error messages. We should use the marco that is most applicable to our test.
+
+- When we run testing file and that file fails, almost no information is provided to us, instead we want each test to run despite a testing failure -- this way we can get a read for which parts of the entire program work and which parts are encountering issues (from here we can draw connections).
+
+- For the most part, as much as possible, we should try to avoid _FATAL unit testing calls because they will stop the entire test, which makes sense as sometimes the program actually cannot continue if some element fails, yet wheneber we can we should try to continue testing as to yield the most possible information.
+
+- Lots of times a unit test will have us utilize different parts of our implementation in sequence, we can apply this in our until testing as well. We have an implementated make and an implemented read function, these work in parallel.
+
+- We will often spend far more time on the unit test than our actual implementation -- the result of this is that our implementation is often much more verbose.
+
+- We need to compile with cunit when we are running cunit tests, this is because we need the compiler to see the functions that are included in cunit -- we just need to add the "-lcunit' flag when we compile.
+
+- Sometimes in unit testing we will find ambiguity -- thus a low score is not always representative, what matters is the communial call on proper implementation.
+
+- Unit tests really alllow us to see confidently where our errors appear -- we can be positive that certain parts of our implementatio is functional.
+
+- We can also run unit tests with Valgrind to ensure that the unit test is not home to the error -- avoiding invalid unit tests is really important, as it is easy to come to the misconception that our error actually lies within our implementation.
+
+- For unit testing it is really important that both users have the same API documentation so that the unit test can transcend a single implementation and work with entire functionality for both implementations -- regardless of any quintissential differences.
+
+- When we create random values for unit testing, we have to note that some values may break a program while others may not, so we should try and include a manual function as well -- Dries adds random values that break a program to be part of the manual function going into the future.
+
+- Linked lists do not exist in every programming lanuage -- as often it will go under the scenes. For the most part we will never want to use a linked list, really what we want is a list, and the linekd list is our best framework for creating that list.
+
+- We use linked lists in C a lot realy because there is no terribly great alternative -- they are kind of all we have got.
+
+- When declaring a struct within a struct of the same type we do have to use the same "struct" keyword as we do not have time to typedef.
+
+- As we have no real idea of where the linked lists are created in memory, unlike in an array, we cannot directly access members at a certain index.
+
+- We often have to create new implementations of linked lists in C, as they are really a simple datatype and we will often want to customize them. We can only really make the linked list work with all datatypes by using macros which creates issues in its own right. Implementation of linked lists is something that is easy to do incorrectly though so be careful.
+
+- Arrays are less flexible (they have distinct scope and cannot change in size). Additionally arrays cannot really save massive amounts of data -- as they are local variables, whereas malloc can take as much data from the heap as it could ever use.
+
+- The linked list will have some overhead as well -- we have to save a pointer as well, and the actual value of the node, so thre is danger there (to represent 6 bytes of data we have to allocate 20). Addtionally malloc() as a function has some overhead, as it will know how much data it must free when you call free() -- so it must save the size of data allocated at certain memory addresses.
+
+- We can create a struct and typedef that struct in a single line rather easily, but we cannot reference from within the struct the same struct with teh typedef name, as the typedef has actually not completed yet.
+
+- Generic APIs or functions will almost always save (void *) datatypes, as we can always allocate more memory and we need that ambiguity. This is how the linked list implementatio in C works.
+
+- For the most part the linked list API will allow us to create our own functionality for how we free data that we have allocated -- this allows our implementationto be fully generic.
+
+- A value type has all of the information that is important to us already included in the C type declaration. Whereas a reference type will have a pointer to information that we use -- when we assign one reference value to another reference value we are assigning pointers.
+
+- For the most part a good test is to see what the maximum size of a datatype is -- if we can define a max size we have an easy way to copy over data, but if not we have to use reference.
+
+- Whenever we use a (void *) we are losing type safety, so we know that somewhere along the way we will have to recast this data around to the original datatype.
+
+- Most commonly we will not need linked lists for the homework -- although we are more than welcome to use it as a framework, often there is another workaround.
+
+- We could save the size of the linked list so we will not have to run the length of the linked list over and over again.
+
+- In a value type we see all of the information immediately, yet in reference types there is something going on behind the scenes that is totally unkown to us as users.
+
+- Unlike in Java, whenever we consturct information we will also have to destruct the same information -- this is where we lose out to object-oriented programming slightly.
+
+- Our implementation must free all of the information that is allocates, this is part of the repsonsibility of creating such implementation.
+
+- You really have to protect your code from individuals who do not know how to program -- we only want to give the user as much information as they need. If they are given too much information, there is absolutely nothing stopping users from preventing users from messing with our implementation directly (there is no real private declaration in C -- though we can use static).
+
+- It is important that our users only use our implementation in the ways we had intended, such that when we change our implementation it will not break their programs, as they should be following our standard.
+
+- The preprocessor follows absolutely no rules of precedence and association that we reviewed towards the beginning of this class, it is entirely token functionality, so there is no implicit order of operations, thus in macros we should always include as many parnetheses to show order as possible.
+
+- Both Java and C++ have generics, while C has absolutely none of that -- this makes qsort easier to implement.

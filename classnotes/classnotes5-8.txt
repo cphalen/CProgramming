@@ -1,0 +1,163 @@
+- Algorithims is the study of resource requirements (CPU is one, but memory is another large issue). Finding new paradigms here is the game plan.
+
+- We need to study how an algorithm will perform relative to another, but we have to be able to examine the functionality of this algorithim in a variety of different datasets.
+
+- Also consider how technology is always changing, new possibilities for algorithims are appearing constantly, and this is vital to new technology advancement.
+
+- Algorithims will also allow us to find more effect ways to program -- although not substantially we can always find the most efficent route.
+
+- Sometimes we can prove that a certain algorithim is the most efficent, but is not necessary implementable, as some of them have no been discovered in how their implementation should work.
+
+- Worst case analysis will examine how an algorithim will function in its worst case scenario (this goes back to comparing algorithims over all datasets, not a single set).
+
+- Algorithims that are interesting will almost never excute in the same efficency every time it runs.
+
+- We examine worst-cast because it is actually pretty common for a lot of algorithims, additionally the best case tells us almost nothing and they are all practically the same, and the average case is difficult to examine.
+
+- Worst-case analysis also helps us create our code concious of the worst possible scenario, we want to make sure our program is robust enough to accomadate the worst-cast, otherwise our program can be deficent or easily dissassembled.
+
+- If one algorithim is an upper bound of another, this simply means that there is some value n(0) where every subsequent value, the corresponding point on the function g(x) can be multiplied by some constant c such that it will yield the corresponding value in f(x). And upper bound says absolutely nothing about proxiamte interactions, at the beginning any function can be larger, but it just notes that there is some certain point in which f(x) is running faster.
+
+- If g(x) is an upper bound of f(x), then we can denote it as O(f(g(x))).
+
+- We can simplify O(x) notation such that the value within will denote other upper bounds for the value x.
+
+- If we have constants in a O(x) notation expression, the constant can be multiplied by the c constant to obtain another c constant that will instead work in the expression and we can remove the constant from the expression.
+
+- With O(x) notation we are not doing runtime analysis, we do not look at the different statements, instead we are looking at how many steps we are taking -- how many times we are iterating.
+
+- A list can never be sorted in constant time, as we need to ensure that the list is sroted, thus the sorting will take a least O(n) to complete.
+
+- A general purpose sorting algorithim means that the algorithim has no idea what information is being given to the dataset, these must run at least in O(n) as stated above.
+
+- In algorithim analysis people will often look at CPU allocation, but we spend actually also need to be concious of how much memory we are using as well. For the most part there will always be a trade often between CPU and memory -- rarely do the two go hand in hand (this is denoted space vs. time).
+
+- The number of cycles a program will run in is insignificant, what is important is the looping, and be careful as they can be easy to lose track of -- also worth noting that the O(x) notation will give us information only about looping that is dependent on an input, otherwise the steps are essentially added in in constant time (as a result, O(x) notation tells us actually nothing at all about how quickly the fucntion will actually run, instead it gives us insight into the complexity of a function).
+
+- Next to constant time, there is logorithmic time is also very efficent when attainable.
+
+- The difference between logorithims of different bases can be expressed as a constant, thus it makes no difference for the complexity class.
+
+- Another common complexity is nlog(n), which makes no massive difference as log(n) is actually quite small. Many algorithims will run in this complexity when they are performing a function but also must verify.
+
+- Once we get into the realm of real exponential functions we are playing a dangerous game and can acutally begin to meet the limits of what our machines can perform (there are only real acceptable for very small values of n).
+
+- A set of data is an unordered, unqiue collection (when we copy this information over, the machine will take no notice to the actual order of the information within). This information is unqiue in that they will have no duplicates.
+
+- With sets we can examine unions, intersections, and subsets, we can also perform functions on sets to insert information of manipulate the already existing information.
+
+- For the most part sets will have functionality that allows us to check for matching domain, understandably the complexity class of this function will be O(mn) where m and n are the sizes of the two sets respectively -- what this means is that most of the functions untilizing sets will be of complexity O(n^2) in essence, which really could be more efficent.
+
+- The reason a set runs n^2 as opposed to just n is that it requires the lists to be unqiue, so while copying over the data the functionality will first ensure that there is no overlap in values, it must check and thus its operation is delayed.
+
+- Keeping lists sorted actually makes data storage significantly more efficent, remember the set will ensure that there is no duplication, thus we can just order the list so we will be given information about the values and whether we will find our endpoint.
+
+- Normally when we are talking about binary trees we are confusing the actual definiton. The true defintion of a binary tree is any tree in which the branching factor of at most two (either one, two, or no children). We can think of a string as a unairy tree I suppose.
+
+- The height of a tree is the largest branch of a tree going to a leaf (a node with no children). We can also relate this back to worst-case almost.
+
+- A full binary tree has only nodes with two children (maximum number of nodes possible), a complete binary tree on the other hand is a full tree that has every level except for the last complete with all of the values on the left of the tree (as far left as possible).
+
+- We can walk a binary tree in a couple of different interesting ways.
+
+- Preorder path will follow a node to the left child, processing the node as passing over the node (not after).
+
+- Inorder path will examine the child on the left, the value of the actual node, and then subsequently the value on the right of the node.
+
+- Postorder will examine the child of the left, the child on the right, and then the actual value at the node.
+
+- Levelorder examines the values from the level of the root continuing down, going left to right on each and every level.
+
+- We can almost always assume that when we are working with trees we will have recurisive calls (we have no real idea how large the tree will be).
+
+- In C, we will create data structures that represent nodes of a binary tree, the nodes save a value, a pointer to a left child and a pointer to a right child.
+
+- In C multiple declarations on one line seperated by a comma is a bad idea as the typedef system gets lost slightly here, think int * x, y; only the x will be a pointer.
+
+- Once we actually go down a level on a binary tree, the commalitity is that we cannot save a value up to the above level, the reason here being that it is not at all necessary, it is actually more efficent to circumvent using recursion.
+
+- For a complete binary tree - which has the shape that we see as most ideal, for this complete binary tree, the maximum number of values on the stack is going to be log(n). Because we are recursing for log(n) steps this is actually not a huge issue, as in log(n) complexity we have really nothing to worry about.
+
+- Binary trees are not ordered or unqiue, in this case they are totally seperate from sets.
+
+- Every linked list is really a binary tree, th eonly difference is there is a remaining pointer that is set to NULL.
+
+- When we are running recursion at O(n), we are actually at danger of overloading the stack once our program begins to recurse upwards of a few thousand times.
+
+- Really the issue here is that binary trees can have all different shapes and sizes, just as we have no information about what values are in a set when initialized.
+
+- Binary search tree -- all values in the left subtree will be smaller than the node, all the values right will be larger than the node's value (thus smallest will be left and larger will be all the way right).
+
+- In a binary search tree we start at the node and use the properties of our serach value to navigate the tree quickly. Every time we make the distinction we are cutting the number of possible values in half, thus we will run with a complexity of O(n^2).
+
+- In a binary search tree, we cannot simply insert new values, as there is a designated place that the new values must be placed -- thus our solution is to first search. As binary serach trees start low and go high, all the values will pile up on the right, and as a result, depending on the order of our sort, we will be essentially ensuring that our function in running in the worst possible time.
+
+- Anyone can easily construct a binary search tree, but that does not make it a perfect datatype -- when constructing a binary search tree, there is only one possible binary search tree that you can make with the given dataset.
+
+- Removing information from a binary search tree -- here we must also find a value once again find a value (so we for sure will be running at O(n)). Once we find the value we want to remove, we cannot just remove the value as we cannot leave a gap in our binary search tree.
+
+- When we are removing a value that has two subtrees attached, we eigher find the smallest element in the rightmost subtree or the largest element in the leftmost subtree -- these are the only elements we can pick that will not violate the properties of a binary search tree.
+
+- A binary search tree will often require that we pass a function to a comparison function, this way the datatype will be able to compare its value without actually knowing what type those values are -- it is on us to decide how we compare.
+
+- Almost always best to use typedef when using function pointers.
+
+- A heap is also a binary tree -- the defining factor here is that every value in the heap has a smaller value than its parent, heaps must be complete binary trees as well, otherwise they will not be heaps.
+
+- A heap will actually have the minimum height of all trees with the same branching factor and an equal number of elements (what those elements actually equate to is entirely irrelevant).
+
+- In a heap we can find the largest elements at the top of the tree.
+
+- For the most part we can swap values in a heap around a lot -- what really becomes important is how structure.
+
+- When we insert a value into a heap, we will add that value in the only plae that is appicable (as there is only one that will perseve the complete nature of the tree), then we recursively call back up making swaps so that the correct values are in the correct places.
+
+- The height of any complete binary tree will be log(n) of its height, this is why the worst case scenario to insert a new value will always be log(n).
+
+- Unfortunately if we want to search through a heap to find every single term as it is not ordered so it is required that we check every single value.
+
+- If we remove the root of a heap we must serach for the next largest value then becomes the heap head and we must reasses which values will be located in which positions -- thus removing the root actually takes log(n).
+
+- Inserting n values into a binary search tree will takes nlog(n) + n as it requries that we walk thet tree, but the "+n" is dominated out of the equation.
+
+- To build a heap, it will take nlog(n) time to create the heap, and the same to descronstruct the heap.
+
+- Because a heap of a given number of elements will always look the same, we can index those values into an array representation and then have all of those values equipped an index. We can use different equations to thus find parent or children values in the list of indexes for the heap.
+
+- The reason heaps can be memory efficent in this sense becuase if we can save them in contiguous array and thus not have all of the overhead as a result of the pointers taht we would otherwise have to use in any given tree.
+
+- A dense array has no holes in the values.
+
+- At any given index in an array, the parent of that element exists at (i-1)/2 and then the children of any given element exist at 2i + 1 and 2i + 2.
+
+- What heap sort will do is continue to remove the root over and over again until it is left only with the smallest value.
+
+- A heap functionality is better of than a binary search tree as we have only what we need in a heap to hold onto the lowest and hightest value in the dataset.
+
+- High priority queue will have the high priority saved at the top and we will be able to draw and add to this seemlessly.
+
+- In C when we inline a function, we are telling the compiler that we are going to be callin a function multiple times, enough so that it is more efficent to inline the function. Even an empty function has some overhead, as the calling of the function saves a return address and so on, when we inline a function this overhead is elminiated, essentially what happens is the compiler just takes the statements and replaces the function call with those inlined statements. The behavior here on a functional level will act exactly the same, the most immedate change is to the linker.
+
+- When inlining a function, it is necessary for us to put the entire function into the header, this is because the call to the function needs to know what will be located within that function, but if all we provide is a prototype, then we cannot sucessfully inline the function -- really this is a performance optimization, it will not change the behavior or the nature of the variables within.
+
+- Originally inline functions were used to overwrite external functions, this is why inline functions are almost always static -- as we do not want to be overwriting functions that we cannot even see the implementation for, that goes against every precedent of encapsulation.
+
+- When we inline we are essentially saying that not calling the function saves us a lot of overhead. We will only really inline functions is we believe that the amount of time to run a function will be essentally tantamout to actually calling the function -- but we hardly know what it is that the compiler will actually do, so we should make sure not to abuse this function.
+
+- We also have to compile information that is inlined over and over again, this is significantly less efficent that simply compiling a function just once. Compilers will somtimes actually just inline its own functions without the user even knowing just as a optimization as well -- the compiler almost always knows best.
+
+- A macro is almost like an inline -- we are essentially just inserting these instructions, but it have no precedence that we have seen before -- remember we are only manipulating strings.
+
+- We should almost always try to favor inline functions over macros -- remember that the compiler practically always knows best.
+
+- As expressions can only really be operated at runtime, when there is a decision between one function being called over another, this is runtime binding, we have no idea which functions are being run at runtime, in compiletime binding we are positive which functions will be running in which orders, this makes it easier for us to inline certain functions (we cannot inline something that is not necessary defined).
+
+- In java when we call functions on classes this is runtime binding, as we know only the type at compile time, and because we can overwrite very function in java with inheritence, we are not sure which method is being called on the instance, and thus we are utilizing runtime binding.
+
+- We can use pointer ambiguity to create something that looks roughly like an actual objects -- it has values that are function pointers that "constructors" will set -- really this is what C++ is doing behind the scenes in Object Oriented Programming.
+
+- When we call our constructors they will create new values of the given interface by creating the interface that is a struct -- this is encapsulation at its finest ladies and gentlemen.
+
+- This is polymorphism in C -- it does exist.
+
+- What C++ actually does when it instantiates an object is it will save a pointer to the interface (that is only instantiated once) so that we will not have to continue saving our functions over and over again.

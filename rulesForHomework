@@ -1,0 +1,5 @@
+Always create a Makefile, a worthwhile default first target, a general case, and a PHONY process that will help us clear out binaries
+
+Use EXIT_FAILURE when a file fails
+
+Always ensure that a loaded file is not actually NULL

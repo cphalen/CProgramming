@@ -1,0 +1,155 @@
+- Notes for smaller courses -- probably Unix is recommended (also git as review)
+
+- Every C file is complied alone, so it becomes import in knowing which variables need to be declared extern or whatnot
+
+- Preprocessors are not native to C, so we cannot use C destinct terms when we talk about them -- also it itself will not understand C conventions
+
+- "dot" C files are universal
+
+- Only the linker will put our C files together, so overlap will not be detected by compiler
+
+- Preprocessors work towards the module concept as well (as well as avoiding repition and conditional inclusion)
+
+- Conditional population is important because it prevents the compiler from ever seeing this information at all -- like it never existed to them
+
+- We can use conditional population to accout for different complier types -- "if C11 use this, if C17 do this" we can easily avoid errors this way without having to create two versions of the same file for different compliers. These are called environment variables
+
+- Preprocessor does not understand C, this is really an important note -- we are working in a mixed language environment. For the preprocessor everything is text
+
+- If you want to know what the complier sees you want to see the output on the preprocessor
+
+- Dynamical vs. statis(typesafe or strictly typed) -- at compile time we always know what type a variable or a function will be, this means we can control what is happening before runtime.
+
+- We can use preprocessor macros to avoid having typesafe functions -- we can write programs can take any variable just by substitution of text, you have just have to be clever in what you define, the result needs to be valid to compile
+
+- Preprocessors are also case sensitive
+
+- Issues with implicit conversions -- we lose percision
+
+- The marco with the preprocessor also allows us to write invalid C and sent it into the complier unfortunately without any errors that are really understandable to us being thrown
+
+- Preprocessor will always take precedence over C complier -- it is evaluated first so this makes sense, but it also is the reason our convention is to capitalize all preprocessor macros, this is some solid reasoning
+
+- Careful of making macros that will expect types will unwanted side effects -- when in doubt always look at the preprocessed text
+
+- "w-all" will not always preceed and error, but it most often does point out errors in our code here. Preprocessors really mess with priority (to the preprocessor it is all just text) -- we can fix priority issues with some fast thinking and parenthesis normally, but we can never really eliminate side effects
+
+- We need the preprocessor because without it we would really be lost in modular programming
+
+- Kernel does a really good job with conditional population -- it is almost universal thanks to this conditional population
+
+- Preprocessor macros are all overhead, this is exteremely useful, as it is only executed once
+
+- We cannot use an "if test" when we are writing code that simply will not compile for older compilers -- instead we have to use the preprocessor here to avoid compile time errors. We can set a precedent using "#define"
+
+- We can see which complier we are using my examining what is defined, if they are defined than we know that we are using a specific complier which accounts for this possibility
+
+- We can only include files that exist, so we can use conditional population to ensure that we only "#include" files that are existant -- it is not hard to find uses for the preprocessors in Linux
+
+- We can reutilize data using the preprocessor and its text manipulation functions -- we can condense a set of bits into just one single variable is his example
+
+- What does the preprocessor actually do? 1) It changes your code into a set of lines, not a set of bytes that represents that present data.
+
+- Complier could care less what is on what lines, unfortunately this is really important to the preprocessor, it means an end line somewhere along the way.
+
+- To get around this we can use a "\" at the end of the line to show line continuation -- this applies not only for code that will be preprocessed but also what will be used in the C program, this is totally obvious but worth noting
+
+- Comments are actually removed by preprocessors, not compliers for C -- they are actually replaced with just one space
+
+- 2) looking for cotinuation lines 3) Replace multiline and single line comments (in newer versions of C -- which also means new preprocessor)
+
+- The reason comments are replaced by a space, not totally removed, is so that extraneous lines or variables are not just appended or conjugated on accident, remember that comments can be interested anywhere
+
+- Even using commnets we cannot replace string literals -- "will not be commented out"
+
+- Trigraphs are another preprocessor element that allow us to replace three characters with other special characters that are necessary when programming C -- the reason for having these is that is allows programms with limited keyboards to program in C
+
+- Technically trigraphs will not be supported in C11, this is because no one has used them in forever, it will throw errors, but it will still replace the token, even inside of string literals which becomes very important because that can really cause issues
+
+- For the most part, if you are having string issues look at the preprocessor output
+
+- Diagraphs are like trigraphs but they are replaced in the second step, this comes after the trigraphs and everything earlier, now we get to tokinization
+
+- Preprocessor knows what a string is because it has a string token "..."
+
+- The reason diagraphs do not work within strings because it is a token, this means that it happens alongside tokenization, so it will be tokenized in the same step as the string literals, and the string literals are always tokenized first
+
+- Preprocessors sort of follow the same rules as C does for tokenization -- it treats each string inbetween spaces as their own token (just as C will process)
+
+- Preprocessors in step two are also responsibile for escaping characters -- these special escaped characters are replaced inside of string literals, this is the on exception, additionally these will not be replaced outside of string literals
+
+- Interphase between preprocessor and compiler is not just simply text, the escaped text has the tokeniztaion, thus it can become different language for C to process
+
+- Two string tokens only seperated by whitespace are joined together, this way we can avoid extraneous whitespace when adding regular expressions
+
+- \0 is the end of a string -- "null"
+
+- Now we are looking for preprocessor directives -- these are what start with the "#"
+
+- For "#define" the replace token can contain spaces, but our initial token cannot
+
+- Preprocessor could care less about our arguments having broken braces -- the preprocessor just sees text, it could care less. We just need a comma seperation and we need the braces to balence (an end brace for each starting brace)
+
+- After the preprocessor replaces a macro, it will once again check the line for more tokens (almost like nested function calls)
+
+- For the most part, if we can do it without the preprocessor we should, yet there are some cases when it is very useful and makes certain tasks possible
+
+- When we're including headers we want to know if were double including certain files because a file were including may be including another file (that we could also include somehow)
+
+- We can avoid these double inclusions as shown earlier by using our condition population -- it will remember which headers it has already seen, this is significantly more efficent, yet we still have to open the system which is an issue.We can use the "#pragma" definition to do the same task, this will only include each file once by definition. Technically this is not standard in C11, but every complier uses it so it should be acceptable
+
+- How to come up with a unique name? Capitials will help, try to be specific
+
+- We can compile without linking using -c command flag
+
+- The linker will go and track down commands if we cannot immediately find the usage. This is why the complier cannot warn you about missing functions or repeat functions, because the linker is what assembles the files
+
+- A "makefile" will help us streamline the process of creating files -- it has the list of commands we need to preprocess, compile and link a C program
+
+- "make -f" allows us to run the makefile with a target name. Otherwise "make" just makes the first target that it encounters
+
+- Make cares a lot about whitespace (more so than python)
+
+- Make deals with dependencies, and we get a huge chain of dependencies here -- we can tell make what dependency different targetfiles have. If you call something with dependencies, it will first create the dependencies and then create the actual targetfile, unless the make file is older than the dependencies we have to recreate the dependencies, but the age of a file is entirely dependent on file modification time, not file creation time
+
+- The tabbing charcater here with the make procedure process is very important -- we have to use a tab (no spaces loser)
+
+- We can use the "-n" flag to show the procedure of the make
+
+- This makes it much easier for us when compiling C programs, we will only compile what we need -- all we have to do is give it that dependency
+
+- If I tell make to create a file to also delete a file, it will also run other commands -- so we add the ".PHONY" there in the beginning, this shows that it is always out of date and thus always needs to be run
+
+- Make streamlines the proess and also ensures that we are not recompiling source code that is unnecessary -- "make can help me automate this"
+
+- Shell has a whole group of manpages, these are essentially documentation pages, we can find these by searching for "man make" or whatever you would like to find the manpage for -- replace "make". There are also info pages that work the same way, these manuels can be found online as well
+
+- We have manpages for C commands as well -- using the "-a" tag will show all of them in sucession of sections. These pages will also explain to us why certain functions exist, which is actually really quite important. We can also see which functions are standard as of now and which are not. We can only use functions that strictly follow C standards in our assignments
+
+- Functional vs. imparative programming languages (what is a functional programming language?)
+
+- Variable names are only temporarily linked to the actual space in memory -- this is why scope is so important as certain variables can be in or out of scope, the scope constitutes the lifetime of a function. In C we do not have "garbage colletion" so a variable life will last the length of a function or the length of a program
+
+- Make has some explicit complier rules, we try to stay away from these for the most part because they are not specific
+
+- The boolean type is really pretty peculiar, the reason here being becuase before it was implemented in the C11 or C99 most people just hacked it in using preprocessors, this is why the type "_Bool" is so peculiar, so that we stay away from breaking any older programs which were built using the preprocessor work around hack -- sometimes people today still use the preprocessor because it looks signficantly better
+
+- We cannot declare a variable to be of type "void", but we can create functions to return "void", basically meaning it returns nothing
+
+- "typedef" will create an allias for a data type, when it sees this allias it will replace it with the actual datatype -- important note, this is not anything like a macro, this is on the compiler level, totally indepent of the preprocessor
+
+- typedef does not macro, instead it saves the datatype, thus we do not run into any of those extraneous issues we do with our macros -- no strange side effects
+
+- The "int argc, char ** chars" helps our main function of our C program take arguments from the command line
+
+- Empty return returns back to the shell
+
+- No garbage collection -- if you open a file you have to close it
+
+- C has no exceptions, so you have to do a good job of managing possible errors
+
+- The "file *" type is a file of any type, think of it as being similar to "unsigned" or "long"
+
+- Because C has no exceptions, we must manually check if the file we are opening is "== NULL"
+
+- We also have to have these makeshift exceptions when we read lines into our C programms in case we once again get a NULL result

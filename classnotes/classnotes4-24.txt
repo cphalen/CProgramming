@@ -1,0 +1,29 @@
+- perror() will output the most recent error that the program has encountered, this is really helpful for command line programs in particulair.
+
+- Picking a random line from a file the way in which we did in the hangman.c file is called resivoir sampling.
+
+- If we incremented our lines after checking if the line is valid then we would not have had to decrement if the line was invaild.
+
+- There are shortcuts to printing out the gallows using an array of structs so that we do not have to stack a load of print lines.
+
+- When we plan on having a value leave a function scope, we need to use malloc(), it will control the lifetime of the variable.
+
+- To avoid strlen() issues, we store a capacity and a used integers, these values show us how much memory we have allocated vs. how much information we will consider used by actual bytes -- this is another way of avoiding read errors that we ran into.
+
+- We can use assert(h) to ensure that pointers are not NULL so that we free them we will not just get a segementation fault, instead we will get an assert that will help us error handle and debug.
+
+- If relloc() fails nothing will happen, as it will nt touch the pointer, but if we set our pointer to the reallocated data, and then the realloc() fails and returns a NULL pointer, we will then lose the pointer to our data that we allocated so we will have remaining unfreed memory (this is another good place to be using asserts()).
+
+- Dries programmed quite a few internal helper functions, this is a relatively good plan going into the future -- same some codespace and save yourself the trouble.
+
+- He uses an ensure_string() function that is really useful to ensure that he is not setting data he has not allocated, additionally it allows him to quickly reallocate data in memory.
+
+- Everytime we caste we are overriding the type system that C offers.
+
+- When we have a const pointer to a structure, everything within the struct also becomes const as well. This makes sense as we are not allowed to change anything about the struct to which we are pointing.
+
+- His varstring_access() always ensures that the returned string will be 0-terminated, this makes sense as well.
+
+- When we are creating pointers we need to ensure that we cannot overlay pointers so that one pointer is set to point to the information that another pointer points to, this is why duplicating pointers can become slightly confusing.
+
+- We should make internal functions that will allow us to ensure that we have no exceeded the maximum of data that we can store.
