@@ -1,0 +1,36 @@
+These are my comments, which were lost in my original work through the grading system. I hope this is helpful to you, but it does not replace or supercede any point scoring that had already been done.
+
+
+0. Very nice and clean style.
+
+
+1.  Check that malloc succeeds.
+
+
+2. varstring_free:
+
+void varstring_free (varstring_handle h) {
+  // We do not free the pointer passed, we only set it to null, as the user may want to reuse
+  free(h->data);
+  h = NULL;
+}
+
+Your thinking is quite refined. However, the caller could not free the memory associated with storing the stucture of h, so you should probably free it and then set it to null anyway. The memory that varstring_new had set aside (first line) is lost forever.
+
+
+3. varstring_get_char:
+  return (*(h->data + (position * sizeof(char))));
+
+Do you code with sunglasses on? It is nice technique.
+
+
+4. I usually find a lot more trouble, but your code is honestly very good, including your manor of commenting.
+
+5. If you keep doing C, beware of what you did in varstring_insert_str with memcpy. There's no way to know for sure that char*str != h->data (or is at least addressing part of one-another's physical memory location) and memcpy very much doesn't like that!
+
+
+6. There are some logic/memory handling problems with your code. Since you have appended a null terminator from the start, you have to keep doing that throughout, or else you have one fewer byte than you intend under some circumstances (lines 109 and 74 are wrong):
+
+  h->data = (char *)malloc((h->length + strlen(str)) * sizeof(char));
+
+Right there in varstring_insert_str you need to have one additional byte, just like varstring_from does. Same thing for varstring_append_str.

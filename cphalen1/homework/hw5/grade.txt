@@ -1,0 +1,23 @@
+1. multiply has memory access violations (TODO)
+
+2. You didn't test nor implement arb_compare.
+
+3. Your README should describe how certain things were implemented (_add, _multiple, etc), and the members of the struct.
+
+4. Your arb_int is corrupted, if I make one like this:
+
+    arb_int_t fresh
+    char s[10];
+    arb_from_string(&fresh, "");
+    arb_to_string(fresh, s);
+
+5. For arb_from_int, what if source = 0
+
+   int sourceLen = floor(log10(llabs(source))) + 1;
+   sourceLen is corrupted! log10(0) is undefined and probably returns garbage. So, it is impossible to make a zero arb_int using your program this way.
+
+
+6. arb_add doesn't add two negative numbers. It subtracts them instead.
+
+
+7. arb_multiply has a problem reading and writing past the memory of the arb_int when the left argument is much much larger or smaller than the right.

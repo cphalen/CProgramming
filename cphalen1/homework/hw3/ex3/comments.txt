@@ -1,0 +1,29 @@
+Makefile Issues:
+
+
+  1. __MAKEFILE_RM_TEMPLATE__
+
+  2.  Your Makefile builds the wrong program name. Quoting the assignment:
+    "program name +palindrome_driver+"
+
+  3. Your Makefile should not echo anything (although it isn't technically wrong). The reason is that the make program already tells the operator which things are success and which are failure, and this is cluttering the output without adding anything new (for example, make accepts arguments from the operator to assist debugging the build scripts and echo is not a flexible technique for doing that).
+
+
+
+Program Issues:
+
+Your program has two serious flaws, at least.
+
+  4. Line 43 of palindrome_driver is not guaranteed to execute if I input a string of characters that is not either alphanumeric or blank (e.g, punctuation). In that case, I press enter and your program proceeds to send &inputString[0] to is_palindrome. At this point, strlen is called by is_palindrome. That's VERY BAD because strlen will be reading some random piece of uninitialized memory and anything could happen.
+
+
+  5. The other major problem is that when the inner while loop at line 44 of palindrome_driver.c encounters a punctuation charcter, it sets i to -1 and this causes the next valid character to write at inputString[-1] and setting i=0. This whole affair causes inputString to be corrupt and the rest of the assumptions the program makes about it are invalid.
+
+
+Style Issues:
+
+  6. just a tip: Because of array decay,
+
+     char * string = &inputString[0];
+
+     could be written simply "is_palindrome(inputString);"

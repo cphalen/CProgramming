@@ -1,0 +1,7 @@
+1. Make default target doesn't create any usable program or feature. But I do like the "-rm" usage in clean.
+
+2. There is a memory leak in the program.
+
+3. It seems that when removing a node, it is not capable of fully removing all of the value-less nodes that might be parents of it.
+
+4. Your code is clear and easy to read and commented just right. You do some dangerous things with memory, but it doesn't cause terrible damage in this version of the program, and it makes trie_remove and insert a bit awkward. Overall very nice.

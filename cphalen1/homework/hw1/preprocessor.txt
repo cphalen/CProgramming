@@ -1,0 +1,15 @@
+#include "preprocessor2.txt"
+#define world class
+Here I am writing world, but it should be replaced with the world "class".
+
+#ifdef world
+Here I have told the preprocessor only to print this line if the token "world" is defined, and as it is defined to demonstrate the earlier token replacement example above, this line will be an output.
+#else
+This line will not be an output because the token "world" is defined.
+#endif
+
+#ifdef notDefined
+This will not be printed because the token "notDefined" is not defined.
+#else
+This line will be printed as an output because it is printed when the token "notDefined" is not defined, as it is now.
+#endif

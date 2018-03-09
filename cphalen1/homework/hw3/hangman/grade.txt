@@ -1,0 +1,7 @@
+Quite nice!!! Thanks for using strncpy, you could also give strnlen a try sometime.
+
+1. You left open the file that you used.
+[-1]
+
+2. Flaw in the game, I mentioned in comments.txt #4.
+[-1]

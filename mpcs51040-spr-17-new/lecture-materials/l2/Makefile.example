@@ -1,0 +1,45 @@
+
+
+# these are make comments; They run to the end of the line
+
+# the general form of a makefile rule is:
+#   target: dependency dependency 
+#   <TAB>commands to build target
+#
+# where target is the name of the file that needs to be built,
+# and the dependencies are the files that target /depends on/,
+# meaning that if the dependencies change, then target should change.
+#
+# Note that for the makefile, WHITESPACE IS SIGNIFICANT and that a tab is not the same
+# as a set of spaces.
+#
+# For example: a .c file depends on the header files it includes.
+# After all, the compiled program contains both the code from the .c file as well
+# as the code from the header file.
+
+
+# By default, unless asked otherwise, make will build the /first target/ encountered
+# (which is, hello, below).
+#
+# So, for this makefile, issuing 'make' is the same as issuing 'make hello'
+hello: hello.o
+	gcc -std=c11 -Wall -pedantic -Werror -o hello hello.o
+
+# It is possible to ask make to build a specific target.
+# So, 'make hello.o' should work as well (since that target is defined below)
+hello.o: hello.c hello.h
+	gcc -c -o hello.o -std=c11 -Wall -pedantic -Werror hello.c
+
+
+# Below is a PHONY target; That means that this target DOES NOT REFER TO A FILENAME
+# Make will act as if it always is out of date (and thus execute the commands to build it)
+.PHONY: clean
+clean:
+	rm hello.o hello
+
+# See what happens if you run make twice in a row...
+
+# What happens if you do:
+#   touch hello.h
+# and then run make again?
+#

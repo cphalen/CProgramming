@@ -1,0 +1,45 @@
+1. It doesn't take a file as a command argument, but I am honestly not
+   sure how serious that is as a problem requirement.
+
+2. A trick to zero the ENTIRE array at once:
+
+   int digitCounter[36] = {0};
+
+   Also see "man calloc" for dynamic arrays.  In both case, it can
+   be faster than your version because there are specialized zeroing
+   circuits that run faster than your for loop.
+
+   On the other hand, I tested the {0} trick, and the compiler generated
+   static assignment code:
+
+   movq    $0, 16(%rsp)
+   movq    $0, 24(%rsp)
+   movq    $0, 32(%rsp)
+   movq    $0, 40(%rsp)
+
+   This is still better because it can be written to memory with
+   hyperthreading, while your version is likely to run sequentially
+   assigning one byte at a time. Here's what corresponds to your looping
+   technique:
+
+   .L3:
+        cmpq    $10, %rax
+        ja      .L5
+        movl    $0, 0(%rbp,%rax,4)
+   .L5:
+        addq    $1, %rax
+        cmpq    $26, %rax
+        jne     .L3
+
+    Amusingly, the compiler realized that you always assigned to
+    characterCounter, so it writes to both of them in one instruction.
+
+
+3. I like your overall technique of looping twice and treating numbers
+seperately than letters. C code often has that "primitive" style. Keeping
+it simple, unfancy and you are more successful.
+
+4. I don't want you to be dicouraged from commenting, but they are much
+more useful when it explains something. You have generally been commenting
+what the code does. Focus on explaining WHY you make a choice when there
+are alternatives, or else call attention to a subtle or bug-prone area.

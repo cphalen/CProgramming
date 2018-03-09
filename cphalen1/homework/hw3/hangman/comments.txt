@@ -1,0 +1,10 @@
+1. Here's how I crash your program: yes "" | ./hangman > /dev/null
+   The reason is your recursion, which has a definite limit. I am not telling you this because you did something wrong. I want you to know that the recurssion consumes a resource and it is possible to run out. Your coding work is top notch.
+
+2. Top notch.
+
+3. You don't close the file that you open, and it stays open until the program terminates. Close it ASAP (and set f to NULL if its going to be reused somewhere else or if there's anything complicated happening).
+
+4. The game has a flaw. When a word has been chosen that is less than the number of allowed guesses, it thinks that I have won. The problem is at exactly line 167
+      if(lettersGuessed >= wordLength)
+   Seems like it would be easy to fix...

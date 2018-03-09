@@ -1,0 +1,29 @@
+You can use hw5_test.sh to test your homework.
+
+Do the following:
+
+1) hw5_test.sh needs to be executed on linux.cs.uchicago.edu
+
+You can use git to checkout the shared repository in your homedirectory on linux.cs.uchicago.edu to get the file.
+
+2) Copy your arb_int.c, arb_int.h and arb_test.c into the directory containing hw5_test.sh
+
+3) go into that directory
+
+4) execute:
+
+./hw5_test.sh
+
+
+The following will be tested:
+
+- If all files are present and properly named
+- If arb_int.c can be compiled with a simple test program (arb_simple.c) and if there are no warning or errors
+- If the above does not contain any errors valgrind can detect.
+
+- The same but this time using your own arb_test.c
+
+- Finally, a set of numbers is generated and the output of your program
+  (running ./arb_test num1 operation num2) is compared to the correct solution.
+
+

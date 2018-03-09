@@ -1,0 +1,14 @@
+Histogram:
+
+It does not take a file argument on the command line for input. [-1]
+
+
+Scramble:
+
+Your scamble program does take command line input [-0].
+
+
+I am taking one point for checking argv like that, and the SAME
+ONE POINT for wasting CPU cycles choosing a random number (neither
+is a big deal by itself, in my opinion, even though argv[1] == NULL
+has serious potential). [-1]

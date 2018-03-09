@@ -1,0 +1,25 @@
+Comments:
+
+Your code is great. Your explanation for number 8 is great, thanks.
+
+
+Do not use EXIT_SUCCESS nor EXIT_FAILURE for anything other than exit()
+and return() from main().
+
+If you still want symbolic constants, define them yourself:
+#define OK 0
+#define ERR 1
+
+If you never care about the return of these functions (often unwise),
+declare them a void rather than int.
+
+
+SCORE:
+
+Hello World      : 2 / 2
+Compiler         : 1 / 1
+Functions        : 2 / 2
+Preprocessor     : 3 / 3
+Token Subst      : 3 / 3
+
+_Total: 11 / 11

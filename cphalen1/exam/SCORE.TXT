@@ -1,0 +1,3 @@
+Score: 81.40%
+Median: 73%
+Average: 63%

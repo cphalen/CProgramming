@@ -1,0 +1,21 @@
+1. Memory access issues in the comments.txt both #3 and #4.
+[-1]
+
+2. Does not properly skip special characters (comment #4); it resets the index, apparently corrupting the input (try "a.a", for example).
+[-1]
+
+3. Palindrome detection works partially, but behaves very badly in a lot of circumstances (issues grown out of the faulty program logic). Your algorithm is good.
+[-1]
+
+4. Your program does not terminate when only punctuation is sent to it. Quoting the assignment:
+"a line consisting only out of non-alphanumeric characters (such as ‘,’ or spaces), followed by return, should also terminate the program."
+[-1]
+
+5. You modified palindrome.h (you removed the last line from it). I am ignoring this...
+[-0]
+
+6. Makefile builds a program name that is not correct.
+[-1]
+
+
+__Total__:  7 / 12

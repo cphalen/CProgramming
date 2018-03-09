@@ -1,0 +1,30 @@
+1. Does anything in the C standard say that argv[1] will equal NULL when
+there is no argument? I think it does not. Beware!!! The way to check
+it is against argc, by the way.
+
+2. Your technique for generating the random permutation is thought out.
+After studying it, I find that the outer for loop terminates after
+about letterCounter * 5 iterations. This happens because near the end
+of the list; it repeatedly attempts to get increasingly-harder to find
+random numbers.  Study the Knuth shuffle (Fisher-Yates shuffle) for an
+example. It is just a couple of lines of C and has the advantage of not
+biasing against the current position.  Nice work, though.
+
+3. FYI: It is very unusual to omit the third ("AFTERTHOUGHT") in the
+for loop.  Perhaps just use while? A matter of taste.
+
+   for(x = 0; x < letterCounter; x++) {
+     uniqueRandom = 1;
+     while (!uniqueRandom) {
+       currentRandom = rand() % letterCounter;
+       uniqueRandom = 0;
+       y = 0;
+       while(uniqueRandom && y < x)
+         if (currentRandom == randoms[y++])
+           uniqueRandom = 1;
+     }
+     randoms[x] = currentRandom;
+   }
+
+
+   This is equivalent to yours and I used it to analyze the running time.

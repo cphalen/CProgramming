@@ -1,0 +1,3 @@
+qScore: 85.71%
+Median: 69.6%
+Average: 70%
